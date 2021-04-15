@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userSignUpRoutes = require('./routes/User/sign-up/SignUp');
 const userSignInRoutes = require('./routes/User/sign-in/SignIn');
+const sellerSignUpRoutes = require('./routes/Seller/sign-up/SignUp');
+const sellerSignInRoutes = require('./routes/Seller/sign-in/SignIn');
 require('dotenv/config');
 
 const app = express();
@@ -24,4 +26,6 @@ mongoose.connect(process.env.DB_CONNECTION
 //Routes
 app.use('/user',userSignUpRoutes);
 app.use('/user',userSignInRoutes);
+app.use('/seller',sellerSignUpRoutes);
+app.use('/seller',sellerSignInRoutes);
 app.listen(3000);
