@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 const sellerRegSchema = new mongoose.Schema({
-    sellerId: Number,
+    sellerId: ObjectId,
     sellerName:{
         type:String,
         required:true
