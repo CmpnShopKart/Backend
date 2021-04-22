@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const cloudinary = require("../../../utils/cloudinary");
 const SellerReg = require('../../../models/Seller/SellerRegistration');
 const multer = require('multer');
+const path = require("path");
 
 const storage = multer.diskStorage({
-destination: function(req,file,cb){
-    cb(null,'./uploads/');
-},
 filename: function(req,file,cb){
     cb(null, new Date().toDateString() + file.originalname);
 }
@@ -19,37 +18,38 @@ const fileFilter = (req,file,cb)=>{
         cb(null,false);
     }
 };
-const upload = multer({storage: storage,limits:{fileSize: 1024*1024*5},filefilter: fileFilter}); 
+const upload1 = multer({storage: storage,limits:{fileSize: 1024*1024*5},filefilter: fileFilter}); 
 
 router.get('/registration',(req,res)=>{
     res.send('hello');
 });
 
 
- router.post('/registration',upload.single('aadharPhoto'),async(req,res) => {
-    const seller = new SellerReg({
-        sellerId : req.body.sellerId,
-        sellerName : req.body.sellerName,
-        phoneNumber : req.body.phoneNumber,
-        email : req.body.email,
-        panNumber : req.body.panNumber,
-        aadharNumber : req.body.aadharNumber,
-        aadharPhoto : req.body.aadharPhoto,
-        gstNo : req.body.gstNo
-    });
+router.post('/registration',upload1.single('aadharPhoto'), async (req,res) => {
     try{
-        const savedseller = await seller.save();
-        res.json(savedseller);
-    }catch(err){
-        res.json({message:err})
+        const result = await cloudinary.uploader.upload(req.file.path)
+        const seller = new SellerReg({
+            sellerId : req.body.sellerId,
+            sellerName : req.body.sellerName,
+            phoneNumber : req.body.phoneNumber,
+            email : req.body.email,
+            panNumber : req.body.panNumber,
+            aadharNumber : req.body.aadharNumber,
+            aadharPhoto : result.secure_url,
+            gstNo : req.body.gstNo
+        });
+        try{
+            const savedseller = await seller.save();
+            res.json(savedseller);
+        }catch(err){
+            res.json({message:err})
+        }
+    } catch(err){
+        console.log(err)
     }
-    console.log(req.file);
 });
-//  router.post('/registration',upload.single('shopImage'),(req,res) => {
-//      console.log(req.file);
-//  });
-//   router.post('/registration',upload.single('aadharImage'),(req,res) => {
-//      console.log(req.file);
-//  });
+
+
+
 
 module.exports = router; 
