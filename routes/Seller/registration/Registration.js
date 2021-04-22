@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Seller = require('../../../models/Seller/SellerRegistration');
+const SellerReg = require('../../../models/Seller/SellerRegistration');
 const multer = require('multer');
 
 const storage = multer.diskStorage({
@@ -26,14 +26,30 @@ router.get('/registration',(req,res)=>{
 });
 
 
- router.post('/registration',upload.single('panImage'),(req,res) => {
+ router.post('/registration',upload.single('aadharPhoto'),async(req,res) => {
+    const seller = new SellerReg({
+        sellerId : req.body.sellerId,
+        sellerName : req.body.sellerName,
+        phoneNumber : req.body.phoneNumber,
+        email : req.body.email,
+        panNumber : req.body.panNumber,
+        aadharNumber : req.body.aadharNumber,
+        aadharPhoto : req.body.aadharPhoto,
+        gstNo : req.body.gstNo
+    });
+    try{
+        const savedseller = await seller.save();
+        res.json(savedseller);
+    }catch(err){
+        res.json({message:err})
+    }
     console.log(req.file);
 });
- router.post('/registration',upload.single('shopImage'),(req,res) => {
-     console.log(req.file);
- });
-  router.post('/registration',upload.single('aadharImage'),(req,res) => {
-     console.log(req.file);
- });
+//  router.post('/registration',upload.single('shopImage'),(req,res) => {
+//      console.log(req.file);
+//  });
+//   router.post('/registration',upload.single('aadharImage'),(req,res) => {
+//      console.log(req.file);
+//  });
 
 module.exports = router; 

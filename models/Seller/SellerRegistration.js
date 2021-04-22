@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const sellerRegSchema = new mongoose.Schema({
-    SellerId: Number,
+    sellerId: Number,
     sellerName:{
         type:String,
         required:true
@@ -18,26 +18,26 @@ const sellerRegSchema = new mongoose.Schema({
         type:Number,
         required:true
     },
-    panPhoto:{
-        type:String,
-        required:true
-    },
+    // panPhoto:{
+    //     type:String,
+    //     required:true
+    // },
     aadharNumber:{
         type:Number,
         required:true
     },
     aadharPhoto:{
         type:String,
-        required:true
+        required:false
     },
-    shopAddress:{
-        type:String,
-        required:true
-    },
-    shopPhoto:{
-        type:String,
-        required:true
-    },
+    // shopAddress:{
+    //     type:String,
+    //     required:true
+    // },
+    // shopPhoto:{
+    //     type:String,
+    //     required:true
+    // },
     gstNo:{
         type:Number,
         required:true
