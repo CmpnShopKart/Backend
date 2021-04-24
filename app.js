@@ -5,7 +5,7 @@ const userSignUpRoutes = require('./routes/User/sign-up/SignUp');
 const userSignInRoutes = require('./routes/User/sign-in/SignIn');
 const sellerSignUpRoutes = require('./routes/Seller/sign-up/SignUp');
 const sellerSignInRoutes = require('./routes/Seller/sign-in/SignIn');
-const sellerRegistrationRoutes = require('./routes/Seller/registration/Registration.js');
+const sellerRegistrationRoutes = require('./routes/Seller/registration/Registration');
 const shopRoutes = require('./routes/Shop/shop');
 require('dotenv/config');
 
@@ -16,7 +16,7 @@ app.use('/uploads',express.static('uploads'));
 app.get('/',(req,res) => {
     res.send("We are on Home Page");
 });
-
+ 
 //Connect to Database
 mongoose.connect(process.env.DB_CONNECTION
     ,{useNewUrlParser:true,useUnifiedTopology:true}
@@ -33,4 +33,3 @@ app.use('/seller',sellerSignInRoutes);
 app.listen(5000);
 app.use('/seller',sellerRegistrationRoutes);
 app.use('/shop',shopRoutes);
-app.listen(3000);
