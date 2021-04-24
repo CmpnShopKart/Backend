@@ -28,4 +28,4 @@ app.use('/user',userSignUpRoutes);
 app.use('/user',userSignInRoutes);
 app.use('/seller',sellerSignUpRoutes);
 app.use('/seller',sellerSignInRoutes);
-app.listen(3000);
+app.listen(5000);
