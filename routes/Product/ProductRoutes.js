@@ -47,11 +47,6 @@ router.post('/', upload.single('product_image'), async (req, res) => {
         product_quantity: req.body.product_quantity
 
 
-
-
-
-
-        
     });
 
     try{
