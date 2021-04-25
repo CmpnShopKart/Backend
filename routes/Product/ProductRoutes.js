@@ -45,6 +45,13 @@ router.post('/', upload.single('product_image'), async (req, res) => {
         product_category: req.body.product_category,
         product_description: req.body.product_description,
         product_quantity: req.body.product_quantity
+
+
+
+
+
+
+        
     });
 
     try{
