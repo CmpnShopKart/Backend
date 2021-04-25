@@ -9,6 +9,7 @@ router.get('/', async (req, res) => {
 
     } catch(err){
         res.json({ message : err});
+        
     }
 });
 
@@ -35,7 +36,7 @@ router.post('/', async (req, res) => {
 
 router.get('/:shop_id', async (req, res) => {
     try{
-        const shop = await Shop.findById(req.params.shop_id);
+        const shop = await Shop.find(req.params.shop_id);
         res.json(shop);
     } catch(err) {
         res.json({ message: "cannot find shop"});
