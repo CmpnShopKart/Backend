@@ -66,6 +66,15 @@ router.get('/:product_id', async (req, res) => {
     }
 });
 
+router.get('/all/:shop_id', async (req, res) => {
+    try{
+        const products = await Product.find({ shop_id : req.params.shop_id});
+        res.json(products);
+    } catch(err) {
+        res.json({ message: "cannot find product"});
+    }
+});
+
 
 router.delete('/:product_id', async (req, res) => {
     try{

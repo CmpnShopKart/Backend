@@ -8,6 +8,7 @@ const sellerSignInRoutes = require('./routes/Seller/sign-in/SignIn');
 const sellerRegistrationRoutes = require('./routes/Seller/registration/Registration');
 const shopRoutes = require('./routes/Shop/shop');
 const productRoutes = require('./routes/Product/ProductRoutes');
+const getShopsRoutes = require('./routes/User/get-shops/GetShops');
 require('dotenv/config');
 
 const app = express();
@@ -29,6 +30,7 @@ mongoose.connect(process.env.DB_CONNECTION
 //Routes
 app.use('/user',userSignUpRoutes);
 app.use('/user',userSignInRoutes);
+app.use('/user',getShopsRoutes);
 app.use('/seller',sellerSignUpRoutes);
 app.use('/seller',sellerSignInRoutes);
 app.use('/seller',sellerRegistrationRoutes);
