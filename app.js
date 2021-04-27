@@ -7,6 +7,7 @@ const sellerSignUpRoutes = require('./routes/Seller/sign-up/SignUp');
 const sellerSignInRoutes = require('./routes/Seller/sign-in/SignIn');
 const sellerRegistrationRoutes = require('./routes/Seller/registration/Registration');
 const shopRoutes = require('./routes/Shop/shop');
+const productRoutes = require('./routes/Product/ProductRoutes');
 require('dotenv/config');
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/user',userSignUpRoutes);
 app.use('/user',userSignInRoutes);
 app.use('/seller',sellerSignUpRoutes);
 app.use('/seller',sellerSignInRoutes);
-app.listen(5000);
 app.use('/seller',sellerRegistrationRoutes);
 app.use('/shop',shopRoutes);
+app.use('/product',productRoutes);
+app.listen(5000);
