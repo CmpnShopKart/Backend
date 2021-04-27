@@ -5,18 +5,6 @@ const ShopSchema = mongoose.Schema({
         type: ObjectId,
         required: true
     },
-    seller_name : {
-        type : String,
-        required: true
-    },
-    seller_phone: {
-        type: Number,
-        required: true
-    },
-    seller_email : {
-        type : String,
-        required: true
-    },
     shop_name: {
         type: String,
         required: true
@@ -26,7 +14,7 @@ const ShopSchema = mongoose.Schema({
         required: true
     },
     seller_gstin : {
-        type: Number,
+        type: String,
         required: true
     },
     shop_latitude : {

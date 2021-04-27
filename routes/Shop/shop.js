@@ -12,12 +12,10 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
+    console.log(req.body)
     const shop = new Shop({
         seller_id: req.body.seller_id,
-        seller_name: req.body.seller_name,
-        seller_phone: req.body.seller_phone,
-        seller_email: req.body.seller_email,
         shop_name: req.body.shop_name,
         shop_address: req.body.shop_address,
         seller_gstin: req.body.seller_gstin,
@@ -33,12 +31,16 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get('/:shop_id', async (req, res) => {
+router.get('/:seller_id', async (req, res) => {
     try{
-        const shop = await Shop.findById(req.params.shop_id);
-        res.json(shop);
+        const shop = await Shop.findOne({seller_id:req.params.seller_id}).exec();
+        if(shop){
+            res.json(shop);
+        }else{
+            res.status(204).json({message:"Shop not found!"});
+        }
     } catch(err) {
-        res.json({ message: "cannot find shop"});
+        res.json({ message: err});
     }
 });
 
