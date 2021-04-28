@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Shop = require('../../models/Shop/Shop');
+const Product = require('../../models/Product/Product');
 
 router.get('/', async (req, res) => {
     try{
@@ -73,6 +74,17 @@ router.patch('/:shop_id', async (req, res) => {
         res.json(updatedShop);
     } catch(err) {
         res.json({ message: "cannot find shop"});
+    }
+});
+
+
+router.get('/products/:shopId',async (req,res) => {
+    try{
+        const products = await Product.find({shop_id:req.params.shopId})
+        res.status(200).json(products);
+    }catch(err){
+        console.log(err);
+        res.status(400).json({message:err});
     }
 });
 
