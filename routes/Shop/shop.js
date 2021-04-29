@@ -98,4 +98,15 @@ router.patch('/:shop_id', async (req, res) => {
     }
 });
 
+
+router.get('/products/:shopId',async (req,res) => {
+    try{
+        const products = await Product.find({shop_id:req.params.shopId})
+        res.status(200).json(products);
+    }catch(err){
+        console.log(err);
+        res.status(400).json({message:err});
+    }
+});
+
 module.exports = router;
