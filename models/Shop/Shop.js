@@ -14,7 +14,7 @@ const ShopSchema = mongoose.Schema({
         required: true
     },
     seller_gstin : {
-        type: String,
+        type:   String,
         required: true
     },
     shop_latitude : {
@@ -24,7 +24,16 @@ const ShopSchema = mongoose.Schema({
     shop_longitude : {
         type: Number,
         required: true
+    },
+    shop_image:{
+        type:String,
+        required:true
     }
 });
+
+
+
+
+
 
 module.exports = mongoose.model('Shop',ShopSchema);
