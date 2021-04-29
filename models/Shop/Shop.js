@@ -14,7 +14,7 @@ const ShopSchema = mongoose.Schema({
         required: true
     },
     seller_gstin : {
-        type: String,
+        type:   String,
         required: true
     },
     shop_latitude : {
@@ -30,5 +30,10 @@ const ShopSchema = mongoose.Schema({
         required:true
     }
 });
+
+
+
+
+
 
 module.exports = mongoose.model('Shop',ShopSchema);
