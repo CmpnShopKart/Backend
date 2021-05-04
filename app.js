@@ -35,7 +35,7 @@ app.use('/user',userSignUpRoutes);
 app.use('/user',userSignInRoutes);
 app.use('/user',getShopsRoutes);
 app.use('/user',addToCartRoutes)
-app.use('/orderprod',productOrders);
+app.use('/user',productOrders);
 app.use('/seller',sellerSignUpRoutes);
 app.use('/seller',sellerSignInRoutes);
 app.use('/seller',sellerRegistrationRoutes);
