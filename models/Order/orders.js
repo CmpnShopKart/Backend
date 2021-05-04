@@ -1,41 +1,31 @@
 const mongoose = require('mongoose');
 var Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
+
+
 const ordersinfo = new mongoose.Schema({
-    Productid:{
-        type:ObjectId,
-        required:true
-    },
-    Product_Name:{
-        type:String,
-        required:true
-    },
-    Product_Price:{
-        type:Number,
-        required:true
-    },
+    Products: {
+        type: Array,
+        required: true
+    }, 
     Date:{
         type:Date,
-        required:true
+        default: Date.now()
     },
     isOrderProcessed:{
         type:String,
-        required:true
+        default: false
     },
     isOrderShipped:{
         type:String,
-        required:true
+        default: false
     },
     isOrderDelivered:{
         type:String,
-        required:true
+        default: false
     },
-    Product_Quantity:{
-        type:Number,
-        required:true
-    },
-    Shop_Id:{
-        type:ObjectId,
-        required:true
+    userId: {
+        type: ObjectId,
+        required: true
     }
 
 });
