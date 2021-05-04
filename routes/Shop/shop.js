@@ -3,6 +3,8 @@ const router = express.Router();
 const cloudinary = require("../../utils/cloudinary");
 const Shop = require('../../models/Shop/Shop');
 const multer = require('multer');
+const Product = require('../../models/Product/Product');
+
 const storage = multer.diskStorage({
     filename: function(req,file,cb){
         cb(null, new Date().toDateString() + file.originalname);
