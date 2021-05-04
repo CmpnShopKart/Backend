@@ -5,8 +5,35 @@ const path = require("path");
 const OrderSeller = require('../../models/OrderSeller/OrderSeller');
 const Product = require('../../models/Product/Product');
 
-router.get('/getorders',(req,res)=>{
-    res.send('hello');
+router.get('/getOrders/:userId',async (req,res) => {
+    try{
+        const userId = req.params.userId;
+        const resArray = []; 
+        const userOrders = await Orders.find({userId:userId});
+        userOrders.map(async order => {
+           try{
+                order.Products.map(async product => {
+                    const matchedProduct = await Product.findById(product.ProductId);
+                    const orderObj = {
+                        ...matchedProduct,
+                        orderDate: order.Date,
+                        isOrderProcessed: order.isOrderProcessed,
+                        isOrderShipped: order.isOrderShipped,
+                        isOrderDelivered: order.isOrderDelivered   
+                    }
+                    resArray.push(orderObj);
+                    res.status(200).send(resArray);
+                })
+           }catch(err){
+                console.log(err);
+                res.send({message: err});
+           } 
+        });
+
+    }catch(err){
+        console.log(err);
+                res.send({message: err});
+    }
 });
 router.post('/postorders', async (req,res) => {
     console.log(req.body);
