@@ -6,33 +6,32 @@ const OrderSeller = require('../../models/OrderSeller/OrderSeller');
 const Product = require('../../models/Product/Product');
 
 const getProductDetails = async(productId) => {
-        try{
-            const matchedProduct = await Product.findById(productId);
-            return matchedProduct._doc;
-        }catch(err){
-            return {message:err};
-        }
+    try{
+        const matchedProduct = await Product.findById(productId);
+        return matchedProduct._doc;
+    }catch(err){
+        return {message:err};
+    }
 }
 
 
 const getUserOrders = async (userId) => {
-    const resArray = [];
     try{
-        const userOrders = await Orders.find({userId:userId});
-        userOrders.map(order => {
-            order.Products.map(async product => {
-                const productDetails = await getProductDetails(product.ProductId)
+        const resArray = [];
+        const userOrders = await Orders.find({userId:userId})
+        for(userOrder of userOrders){
+            for(product of userOrder.Products){
+                const productDetails = await getProductDetails(product.ProductId);
                 const productObj = {
                     ...productDetails,
-                    Date:order.Date,
-                    isOrderProcessed:order.isOrderProcessed,
-                    isOrderShipped:order.isOrderShipped,
-                    isOrderDelivered:order.isOrderDelivered
+                    Date:userOrder.Date,
+                    isOrderProcessed:userOrder.isOrderProcessed,
+                    isOrderShipped:userOrder.isOrderShipped, 
+                    isOrderDelivered:userOrder.isOrderDelivered
                 }
                 resArray.push(productObj);
-            }) 
-        })
-        console.log(resArray);
+            }
+        }
         return resArray;
     }catch(err){
         console.log(err);
@@ -40,14 +39,17 @@ const getUserOrders = async (userId) => {
     }
 }
 
+
 router.get('/getOrders/:userId',async(req,res) => {
     try{
         const userOrders = await getUserOrders(req.params.userId);
+        console.log(userOrders);
         res.status(200).send(userOrders);
     }catch(err){
         res.status(400).send({message:err});
     }
 });
+
 
 router.post('/postorders', async (req,res) => {
     console.log(req.body);
