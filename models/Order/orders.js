@@ -11,18 +11,6 @@ const ordersinfo = new mongoose.Schema({
         type:Date,
         default: Date.now()
     },
-    isOrderProcessed:{
-        type:String,
-        default: false
-    },
-    isOrderShipped:{
-        type:String,
-        default: false
-    },
-    isOrderDelivered:{
-        type:String,
-        default: false
-    },
     userId: {
         type: ObjectId,
         required: true

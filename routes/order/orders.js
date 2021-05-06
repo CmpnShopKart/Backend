@@ -25,9 +25,9 @@ const getUserOrders = async (userId) => {
                 const productObj = {
                     ...productDetails,
                     Date:userOrder.Date,
-                    isOrderProcessed:userOrder.isOrderProcessed,
-                    isOrderShipped:userOrder.isOrderShipped, 
-                    isOrderDelivered:userOrder.isOrderDelivered
+                    isProductProcessed:product.isProductProcessed,
+                    isProductShipped:product.isProductShipped, 
+                    isProductDelivered:product.isProductDelivered
                 }
                 resArray.push(productObj);
             }
@@ -56,9 +56,6 @@ router.post('/postorders', async (req,res) => {
         const orders_info = new Orders({
             Products: req.body.Products,
             Date : req.body.Date,
-            isOrderProcessed : req.body.isOrderProcessed,
-            isOrderShipped : req.body.isOrderShipped,
-            isOrderDelivered : req.body.isOrderDelivered,
             userId: req.body.UserId
         });
         try{
