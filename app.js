@@ -11,6 +11,7 @@ const productRoutes = require('./routes/Product/ProductRoutes');
 const getShopsRoutes = require('./routes/User/get-shops/GetShops');
 const productOrders=require('./routes/order/orders');
 const addToCartRoutes  = require('./routes/addToCart/addToCart');
+const sellerOrderRoutes = require('./routes/order/sellerOrders');
 
 require('dotenv/config');
 
@@ -39,7 +40,7 @@ app.use('/user',productOrders);
 app.use('/seller',sellerSignUpRoutes);
 app.use('/seller',sellerSignInRoutes);
 app.use('/seller',sellerRegistrationRoutes);
+app.use('/seller',sellerOrderRoutes);
 app.use('/shop',shopRoutes);
 app.use('/product',productRoutes);
-
 app.listen(5000);

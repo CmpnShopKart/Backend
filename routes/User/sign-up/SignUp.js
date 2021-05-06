@@ -6,7 +6,8 @@ router.post('/signup',async(req,res) => {
     const user = new User({
         userName:req.body.userName,
         password:req.body.password,
-        email:req.body.email
+        email:req.body.email,
+        shippingAddress: req.body.shippingAddress
     });
     try{
         const savedUser = await user.save();

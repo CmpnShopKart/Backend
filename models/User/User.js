@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
     cartItems:{
         type:Array,
         required:false
+    },
+    shippingAdress:{
+        type:String,
+        required:true
     }
 });
 

@@ -69,7 +69,8 @@ router.post('/postorders', async (req,res) => {
                     const SellerOrder = new OrderSeller({
                         ProductId,
                         SellerId,
-                        UserId
+                        UserId,
+                        OrderId: savedorders._id
                     });
                     SellerOrder.save();
                 } catch (error) {
