@@ -14,6 +14,10 @@ const ordersinfo = new mongoose.Schema({
     UserId: {
         type: ObjectId,
         required: true
+    },
+    OrderId:{
+        type: ObjectId,
+        required: true
     }
 
 });
