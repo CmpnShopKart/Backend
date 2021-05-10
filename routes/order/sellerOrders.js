@@ -37,11 +37,18 @@ const getSellerOrders = async (SellerId) => {
         for(sellerOrder of sellerOrders){
             const productDetails = await getProductDetails(sellerOrder.ProductId);
             const userDetails = await getUserDetails(sellerOrder.UserId);
+            const matchedOrder = await Orders.findById(sellerOrder.OrderId);
+            console.log(matchedOrder);
+            console.log(sellerOrder.ProductId);
+            const matchedProduct = matchedOrder.Products.find(product => product.ProductId === sellerOrder.ProductId.toString());
                 const productObj = {
                     ...productDetails,
                     ...userDetails,
                     Date:sellerOrder.Date,
-                    OrderId: sellerOrder.OrderId
+                    OrderId: sellerOrder.OrderId,
+                    isProductProcessed:matchedProduct.isProductProcessed,
+                    isProductShipped:matchedProduct.isProductShipped,
+                    isProductDelivered:matchedProduct.isProductDelivered
                 }
                 resArray.push(productObj);
         }

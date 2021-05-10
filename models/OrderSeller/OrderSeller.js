@@ -18,6 +18,10 @@ const ordersinfo = new mongoose.Schema({
     OrderId:{
         type: ObjectId,
         required: true
+    },
+    Date:{
+        type:Date,
+        default:Date.now()
     }
 
 });
