@@ -48,7 +48,8 @@ const getSellerOrders = async (SellerId) => {
                     OrderId: sellerOrder.OrderId,
                     isProductProcessed:matchedProduct.isProductProcessed,
                     isProductShipped:matchedProduct.isProductShipped,
-                    isProductDelivered:matchedProduct.isProductDelivered
+                    isProductDelivered:matchedProduct.isProductDelivered,
+                    ProductId:sellerOrder.ProductId
                 }
                 resArray.push(productObj);
         }

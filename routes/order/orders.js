@@ -64,6 +64,14 @@ router.post('/postorders', async (req,res) => {
                 try {
                     const ProductId = product.ProductId;
                     const MatchedProduct = await Product.findById(ProductId);
+                    const updatedProduct = await Product.updateOne(
+                        { _id : ProductId},
+                        { 
+                            $set:{
+                                product_quantity: MatchedProduct.product_quantity-1
+                            } 
+                        }
+                    );
                     const SellerId = MatchedProduct.seller_id;
                     const UserId = req.body.UserId;
                     const SellerOrder = new OrderSeller({
@@ -75,7 +83,7 @@ router.post('/postorders', async (req,res) => {
                     SellerOrder.save();
                 } catch (error) {
                     console.log(error);
-                    res.json({ message: err});
+                    res.json({ message: error});
                 }
             })
             res.json(savedorders);
