@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema({
         type:Array,
         required:false
     },
-    shippingAdress:{
+    shippingAddress:{
         type:String,
         required:true
     }
